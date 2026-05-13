@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Daily Pulse | Category</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Sans+Telugu:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <h1><a href="index.html" data-i18n="logo" style="color:inherit;text-decoration:none;">The Daily Pulse.</a></h1>
+            </div>
+            <div class="header-actions" style="display: flex; align-items: center; gap: 20px;">
+                <div class="date-display" id="current-date" style="font-size: 0.95rem; font-weight: 500; color: var(--text-light); text-transform: uppercase;"></div>
+                <button class="menu-btn" id="mobile-menu-btn"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </div>
+        <!-- Navigation -->
+        <nav class="main-nav">
+            <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                <ul class="nav-links">
+                    <li><a href="index.html" data-i18n="cat_home">Home</a></li>
+                    <li><a href="category.html?cat=World" data-i18n="cat_world">World</a></li>
+                    <li><a href="category.html?cat=Politics" data-i18n="cat_politics">Politics</a></li>
+                    <li><a href="category.html?cat=Business" data-i18n="cat_business">Business</a></li>
+                    <li><a href="category.html?cat=Technology" data-i18n="cat_technology">Technology</a></li>
+                    <li><a href="category.html?cat=Science" data-i18n="cat_science">Science</a></li>
+                    <li><a href="category.html?cat=Health" data-i18n="cat_health">Health</a></li>
+                    <li><a href="category.html?cat=Sports" data-i18n="cat_sports">Sports</a></li>
+                    <li><a href="category.html?cat=Entertainment" data-i18n="cat_entertainment">Entertainment</a></li>
+                </ul>
+                <div class="nav-actions" style="display: flex; align-items: center; gap: 15px;">
+                    <button id="theme-toggle" class="theme-toggle" title="Toggle Theme" style="color: var(--text-main); margin:0; font-size: 1.2rem;"><i class="fa-solid fa-moon"></i></button>
+                    <select id="lang-switcher" class="lang-switcher" style="border-color: var(--border-color); color: var(--text-main); margin:0; padding: 5px 10px; background: var(--bg-alt);">
+                        <option value="en">English</option>
+                        <option value="te">తెలుగు</option>
+                    </select>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Ad Space -->
+    <div class="container ad-banner">
+        <div class="ad-content">Advertisement Space (728x90)</div>
+    </div>
+
+    <!-- Category Header -->
+    <div class="category-page-header">
+        <div class="container">
+            <h1 id="category-page-title">Category</h1>
+        </div>
+    </div>
+
+    <!-- Main Content Layout -->
+    <div class="container content-layout">
+        <!-- Left Column: Articles -->
+        <main class="main-content" id="category-articles-container" style="padding-top: 50px;">
+            <!-- Grid Injected via JS -->
+            <div class="container pagination-container" id="pagination-container" style="margin-top: 40px; margin-bottom: 20px;">
+                <!-- Pagination Injected via JS -->
+            </div>
+        </main>
+        
+        <!-- Right Column: Sidebar -->
+        <aside class="sidebar" style="padding-top: 50px;">
+            
+            <div class="widget">
+                <h3 data-i18n="follow_us" style="margin-bottom: 20px; font-family:var(--font-heading);">Follow Us</h3>
+                <div class="social-grid">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="widget ad-widget" style="padding:0; border:none; background:transparent; box-shadow:none;">
+                <div class="ad-content vertical" style="width:100%;">Advertisement (300x250)</div>
+            </div>
+
+            <!-- Category Poll -->
+            <div class="widget poll-widget">
+                <div class="section-header" style="border-bottom: 1px solid var(--border-color); padding-bottom:10px; margin-bottom:20px;">
+                    <h3 data-i18n="poll_title" style="font-size:1.2rem; font-family:var(--font-heading); color:var(--text-main);">Poll of the Day</h3>
+                </div>
+                <p data-i18n="poll_question" style="font-weight:600; margin-bottom:15px; font-size:0.95rem;"></p>
+                <form id="sidebar-poll-form" class="poll-form">
+                    <label class="poll-option">
+                        <input type="radio" name="poll" value="0"> <span data-i18n="poll_op1"></span>
+                    </label>
+                    <label class="poll-option">
+                        <input type="radio" name="poll" value="1"> <span data-i18n="poll_op2"></span>
+                    </label>
+                    <label class="poll-option">
+                        <input type="radio" name="poll" value="2"> <span data-i18n="poll_op3"></span>
+                    </label>
+                    <button type="submit" class="poll-btn" data-i18n="poll_vote">Vote</button>
+                </form>
+                <div id="sidebar-poll-results" class="poll-results" style="display:none;"></div>
+            </div>
+
+            <div class="widget">
+                <div class="section-header" style="border-bottom: 1px solid var(--border-color); padding-bottom:10px; margin-bottom:20px;">
+                    <h3 data-i18n="popular_posts" style="font-size:1.2rem; font-family:var(--font-heading); color:var(--text-main);">Popular Posts</h3>
+                </div>
+                <ul class="sidebar-list" id="popular-posts-list">
+                    <!-- Injected via JS -->
+                </ul>
+            </div>
+
+            <div class="widget">
+                <div class="section-header" style="border-bottom: 1px solid var(--border-color); padding-bottom:10px; margin-bottom:20px;">
+                    <h3 data-i18n="recommended_posts" style="font-size:1.2rem; font-family:var(--font-heading); color:var(--text-main);">Recommended</h3>
+                </div>
+                <ul class="sidebar-list" id="recommended-posts-list">
+                    <!-- Injected via JS -->
+                </ul>
+            </div>
+            
+        </aside>
+    </div>
+
+    <!-- Ad Space -->
+    <div class="container ad-banner" style="margin-bottom: 40px;">
+        <div class="ad-content">Advertisement Space (728x90)</div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-col">
+                <h2 data-i18n="logo">The Daily Pulse.</h2>
+                <p data-i18n="footer_desc"></p>
+                <div class="social-links">
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3 data-i18n="footer_company">Company</h3>
+                <ul>
+                    <li><a href="#" data-i18n="footer_about">About Us</a></li>
+                    <li><a href="#" data-i18n="footer_careers">Careers</a></li>
+                    <li><a href="#" data-i18n="footer_privacy">Privacy Policy</a></li>
+                    <li><a href="#" data-i18n="footer_terms">Terms of Service</a></li>
+                    <li><a href="#" data-i18n="footer_contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 <span data-i18n="rights"></span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Actions -->
+    <div class="floating-actions">
+        <button id="scroll-top" class="fab"><i class="fa-solid fa-arrow-up"></i></button>
+        <button id="scroll-bottom" class="fab"><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

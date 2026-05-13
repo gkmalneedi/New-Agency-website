@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | The Daily Pulse</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary: #bf202f; --bg: #f4f7f6; --sidebar: #1e293b; --text: #333; --border: #e2e8f0; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background: var(--bg); color: var(--text); }
+        .admin-layout { display: flex; min-height: 100vh; }
+        
+        /* Sidebar */
+        .admin-sidebar { width: 260px; background: var(--sidebar); color: #fff; display: flex; flex-direction: column; }
+        .admin-logo { padding: 25px; font-size: 1.5rem; font-weight: 700; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .admin-nav { list-style: none; padding: 20px 0; flex-grow: 1; }
+        .admin-nav li a { display: block; padding: 15px 25px; color: #cbd5e1; text-decoration: none; transition: 0.3s; }
+        .admin-nav li a:hover, .admin-nav li a.active { background: var(--primary); color: #fff; border-left: 4px solid #fff; }
+        .back-to-site { display: block; padding: 20px; text-align: center; color: #94a3b8; text-decoration: none; border-top: 1px solid rgba(255,255,255,0.1); }
+        
+        /* Main Content */
+        .admin-main { flex: 1; padding: 40px; overflow-y: auto; height: 100vh; }
+        .admin-section { display: none; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+        .admin-section.active { display: block; }
+        .admin-section h2 { margin-bottom: 25px; color: #0f172a; border-bottom: 2px solid var(--bg); padding-bottom: 10px; }
+        
+        /* Forms */
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-weight: 500; margin-bottom: 8px; font-size: 0.9rem; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 4px; font-size: 0.95rem; }
+        .form-row { display: flex; gap: 20px; }
+        .form-row .form-group { flex: 1; }
+        
+        .btn { background: var(--primary); color: #fff; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-weight: 500; }
+        .btn:hover { opacity: 0.9; }
+        .btn-danger { background: #ef4444; }
+        
+        .data-list { margin-top: 30px; border-top: 1px solid var(--border); padding-top: 20px; }
+        .data-item { background: var(--bg); padding: 15px; margin-bottom: 10px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; }
+        .data-item-details { display: flex; flex-direction: column; gap: 5px; }
+    </style>
+</head>
+<body>
+    <div class="admin-layout">
+        <aside class="admin-sidebar">
+            <div class="admin-logo">Pulse Admin</div>
+            <ul class="admin-nav">
+                <li><a href="#" class="active" data-target="settings">Settings & Logo</a></li>
+                <li><a href="#" data-target="social">Social Links</a></li>
+                <li><a href="#" data-target="categories">Categories</a></li>
+                <li><a href="#" data-target="hero">Hero Slider</a></li>
+                <li><a href="#" data-target="articles">Articles</a></li>
+                <li><a href="#" data-target="reset">System</a></li>
+            </ul>
+            <a href="index.html" class="back-to-site"><i class="fa-solid fa-arrow-left"></i> Back to Site</a>
+        </aside>
+        
+        <main class="admin-main">
+            <!-- Settings Section -->
+            <section id="settings" class="admin-section active">
+                <h2>General Settings & Logo</h2>
+                <form id="form-settings">
+                    <div class="form-group">
+                        <label>Logo Type</label>
+                        <select id="set-logo-type">
+                            <option value="text">Text Logo</option>
+                            <option value="image">Image Logo</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="logo-img-group" style="display:none;">
+                        <label>Logo Image URL</label>
+                        <input type="url" id="set-logo-img" placeholder="https://...">
+                    </div>
+                    <div class="form-row" id="logo-text-group">
+                        <div class="form-group">
+                            <label>Site Logo Text (English)</label>
+                            <input type="text" id="set-logo-en">
+                        </div>
+                        <div class="form-group">
+                            <label>Site Logo Text (Telugu)</label>
+                            <input type="text" id="set-logo-te">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Footer Description (English)</label>
+                            <textarea id="set-footer-en" rows="3" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Footer Description (Telugu)</label>
+                            <textarea id="set-footer-te" rows="3" required></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn">Save Settings</button>
+                </form>
+            </section>
+
+            <!-- Social Links Section -->
+            <section id="social" class="admin-section">
+                <h2>Social Links</h2>
+                <form id="form-social">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Facebook URL</label>
+                            <input type="url" id="soc-facebook" placeholder="https://facebook.com/...">
+                        </div>
+                        <div class="form-group">
+                            <label>Twitter / X URL</label>
+                            <input type="url" id="soc-twitter" placeholder="https://twitter.com/...">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Instagram URL</label>
+                            <input type="url" id="soc-instagram" placeholder="https://instagram.com/...">
+                        </div>
+                        <div class="form-group">
+                            <label>YouTube URL</label>
+                            <input type="url" id="soc-youtube" placeholder="https://youtube.com/...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>LinkedIn URL</label>
+                        <input type="url" id="soc-linkedin" placeholder="https://linkedin.com/...">
+                    </div>
+                    <button type="submit" class="btn">Save Social Links</button>
+                </form>
+            </section>
+
+            <!-- Categories Section -->
+            <section id="categories" class="admin-section">
+                <h2>Manage Categories</h2>
+                <form id="form-category">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Category ID (e.g. technology)</label>
+                            <input type="text" id="cat-id" required placeholder="lowercase, no spaces">
+                        </div>
+                        <div class="form-group">
+                            <label>Name (English)</label>
+                            <input type="text" id="cat-en" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Name (Telugu)</label>
+                            <input type="text" id="cat-te" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn">Add Category</button>
+                </form>
+                <div class="data-list" id="category-list"></div>
+            </section>
+            
+            <!-- Hero Slider -->
+            <section id="hero" class="admin-section">
+                <h2>Add Hero Slide</h2>
+                <form id="form-hero">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Title (English)</label>
+                            <input type="text" id="hero-title-en" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Title (Telugu)</label>
+                            <input type="text" id="hero-title-te" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select id="hero-category" required class="dynamic-cat-select">
+                                <!-- JS populated -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Author</label>
+                            <input type="text" id="hero-author" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Image URL</label>
+                        <input type="url" id="hero-image" placeholder="https://..." required>
+                    </div>
+                    <button type="submit" class="btn">Add Slide</button>
+                </form>
+                <div class="data-list" id="hero-list"></div>
+            </section>
+
+            <!-- Articles Section -->
+            <section id="articles" class="admin-section">
+                <h2>Add New Article</h2>
+                <form id="form-article">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Article Title (English)</label>
+                            <input type="text" id="art-title-en" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Article Title (Telugu)</label>
+                            <input type="text" id="art-title-te" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Content Paragraph (English)</label>
+                            <textarea id="art-content-en" rows="3" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Content Paragraph (Telugu)</label>
+                            <textarea id="art-content-te" rows="3" required></textarea>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select id="art-category" required class="dynamic-cat-select">
+                                <!-- JS populated -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Author Name</label>
+                            <input type="text" id="art-author" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Featured Image URL</label>
+                        <input type="url" id="art-image" placeholder="https://..." required>
+                    </div>
+                    <button type="submit" class="btn">Publish Article</button>
+                </form>
+                <div class="data-list" id="article-list"></div>
+            </section>
+            
+            <section id="reset" class="admin-section">
+                <h2>System Management</h2>
+                <p style="margin-bottom:20px;">Use this to completely reset your website data back to defaults.</p>
+                <button id="btn-reset" class="btn btn-danger">Factory Reset Database</button>
+            </section>
+        </main>
+    </div>
+    <script src="admin.js"></script>
+</body>
+</html>
